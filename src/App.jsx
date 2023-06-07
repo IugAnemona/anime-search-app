@@ -1,7 +1,12 @@
+import "./App.css";
+import Navbar from "./components/Home/Navbar/Navbar";
+import logo from "./assets/icon.png";
+import Main from "./components/Home/Maincontent/Main";
 function App() {
   return (
-    <div className="w-screen h-screen bg-red-300">
-      <h1 className="text-3xl font-bold text-red-600">Hello world!</h1>
+    <div className="bg-color-white h-screen">
+      <Navbar logo={logo}></Navbar>
+      <Main></Main>
     </div>
   );
 }
