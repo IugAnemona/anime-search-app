@@ -6,8 +6,8 @@ function Main() {
   const [trace, setTrace] = useState("");
 
   const [hasAnilist, hasTrace] = [anilist, trace];
-  let link =
-    "https://api.duniagames.co.id/api/content/upload/file/2675731411632395146.jpeg";
+  let link = "";
+  // "https://api.duniagames.co.id/api/content/upload/file/2675731411632395146.jpeg";
 
   async function requestApi(link) {
     const resultApi = await traceMoe(link);

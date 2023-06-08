@@ -5,7 +5,6 @@ async function traceMoe(link) {
       link
     )}`
   ).then((e) => e.json());
-  console.log(api);
   return api;
 }
 
