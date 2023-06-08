@@ -16,7 +16,6 @@ function Main() {
       resultApi.result[0].video,
       resultApi.result[0].episode,
     ];
-    console.log(resultApi);
     const anilistData = [
       resultApi.result[0].anilist.title.romaji,
       `https://anilist.co/anime/${resultApi.result[0].anilist.id}`,
@@ -49,7 +48,7 @@ function Main() {
           </div>
         </div>
         {hasAnilist && hasTrace ? (
-          <div className="flex mt-5 p-2 md:p-0 h-5/6 md:h-auto bg-primary-color rounded-2xl flex-wrap md:items-center lg:h-auto">
+          <div className="flex mt-5 p-2 md:p-0 h-5/6 md:h-auto 2xl:p-2 bg-primary-color rounded-2xl flex-wrap md:items-center lg:h-auto">
             <div className="w-full my-5 md:mx-2 md:w-6/12 lg:w-3/6 2xl:w-5/12 2xl:my-0">
               <video
                 autoPlay
