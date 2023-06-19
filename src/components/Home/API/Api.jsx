@@ -5,7 +5,28 @@ async function traceMoe(link) {
       link
     )}`
   ).then((e) => e.json());
-  return api;
+
+  const jikanData = await fetch(
+    `https://api.jikan.moe/v4/anime?q=${api.result[0].anilist.title.romaji}&sfw`
+  ).then((e) => e.json());
+
+  console.log(jikanData);
+
+  const apiData = {
+    title: jikanData.data[0].title,
+    image: jikanData.data[0].images.jpg.large_image_url,
+    studio: jikanData.data[0].studios[0].name,
+    url: jikanData.data[0].url,
+    score: jikanData.data[0].score,
+    genres: jikanData.data[0].genres.map((x) => x.name),
+    episodes: jikanData.data[0].episodes,
+    synopsis: jikanData.data[0].synopsis,
+    video: api.result[0].video,
+    episode: api.result[0].episode,
+  };
+  console.log(apiData);
+
+  return apiData;
 }
 
 export default traceMoe;
