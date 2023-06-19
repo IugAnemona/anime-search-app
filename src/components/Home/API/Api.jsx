@@ -10,8 +10,6 @@ async function traceMoe(link) {
     `https://api.jikan.moe/v4/anime?q=${api.result[0].anilist.title.romaji}&sfw`
   ).then((e) => e.json());
 
-  console.log(jikanData);
-
   const apiData = {
     title: jikanData.data[0].title,
     image: jikanData.data[0].images.jpg.large_image_url,
@@ -24,7 +22,6 @@ async function traceMoe(link) {
     video: api.result[0].video,
     episode: api.result[0].episode,
   };
-  console.log(apiData);
 
   return apiData;
 }
