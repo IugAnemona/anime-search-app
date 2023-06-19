@@ -1,43 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ImSpinner11 } from "react-icons/im";
 import traceMoe from "../API/Api";
+import AnimeCard from "../AnimeCard/AnimeCard";
 
 function Main() {
-  const [anilist, setAnilist] = useState("");
-  const [trace, setTrace] = useState("");
+  const [apiData, setApiData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [hasAnilist, hasTrace] = [anilist, trace];
+  useEffect(() => {
+    requestApi(
+      "https://api.duniagames.co.id/api/content/upload/file/2675731411632395146.jpeg"
+    );
+  }, []);
+
   let link = "";
   // "https://api.duniagames.co.id/api/content/upload/file/2675731411632395146.jpeg";
 
   async function requestApi(link) {
     const resultApi = await traceMoe(link);
-    const traceData = [
-      resultApi.result[0].image,
-      resultApi.result[0].video,
-      resultApi.result[0].episode,
-    ];
-    const anilistData = [
-      resultApi.result[0].anilist.title.romaji,
-      `https://anilist.co/anime/${resultApi.result[0].anilist.id}`,
-    ];
-    setAnilist(anilistData);
-    setTrace(traceData);
+
+    setApiData(resultApi);
+    setLoading(false);
   }
 
-  //   const setDados = () => {
-
-  //   };
-
   return (
-    <main className="flex w-full h-5/6 my-10">
-      <div className="container mx-auto h-full my-4 rounded">
+    <main className="flex w-full my-10">
+      <div className="mx-auto h-full w-full my-4 rounded">
         <div className="p-2 bg-primary-color rounded flex justify-between items-center">
-          <div className="">
+          <div className="flex-1">
             <input
               onChange={(e) => (link = `${e.target.value}`)}
               placeholder="Image URL"
               name="imgURL"
-              className="p-2 border-2 outline-0 border-border rounded-md text-base focus:border-focus focus:shadow-sm text-text"
+              className="p-2 border-2 outline-0 border-border w-2/3 max-w-xl min-w-[200px] rounded-md text-base focus:border-focus focus:shadow-sm text-text"
             />
           </div>
           <div
@@ -47,39 +42,41 @@ function Main() {
             <i className="fa-sharp fa-solid fa-magnifying-glass "></i>
           </div>
         </div>
-        {hasAnilist && hasTrace ? (
-          <div className="flex mt-5 p-2 md:p-0 h-5/6 md:h-auto 2xl:p-2 bg-primary-color rounded-2xl flex-wrap md:items-center lg:h-auto">
-            <div className="w-full my-5 md:mx-2 md:w-6/12 lg:w-3/6 2xl:w-5/12 2xl:my-0">
-              <video
-                autoPlay
-                muted
-                loop
-                className="w-full rounded mx-auto lg:w-full border-4 border-color-white"
-                src={trace[1]}
-              ></video>
-            </div>
-            <div className="w-auto mx-auto p-4 md:flex-1 md:mx-2 bg-color-white rounded-lg opacity-50 text-primary-color md:h-auto">
-              <div className="flex justify-center  ">
-                <h2 className=" text-3xl sm:text-4xl md:text-4xl">
-                  {anilist[0]}
-                </h2>
-              </div>
 
-              <div className="m-5 md:ml-0 flex flex-wrap justify-center md:justify-start">
-                <ul className="text-start text-2xl md:3xl">
-                  <li className="my-2">
-                    <p className=" ">Episode: {trace[2]}</p>
-                  </li>
-                  <li className="my-2">
-                    <a href={anilist[1]} target="_blank" rel="noreferrer">
-                      Anilist Link
-                    </a>
-                  </li>
-                </ul>
+        <div className="flex mt-5 p-2 md:h-auto 2xl:p-2 bg-primary-color rounded-2xl flex-wrap md:justify-between md:items-start lg:h-auto">
+          {loading ? (
+            <h1 className="text-white mx-auto text-8xl animate-spin">
+              <ImSpinner11 />
+            </h1>
+          ) : (
+            <div className="flex-1 flex flex-wrap ">
+              <div className="my-5 flex-1 md:mx-5">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  className="w-full rounded mx-auto lg:w-full border-4 border-color-white  md:min-w-[20rem]"
+                  src={apiData.video}
+                ></video>
+                <div className="bg-slate-200 m-5 py-6 text-center font-bold text-3xl">
+                  <h2>episode: {apiData.episode}</h2>
+                </div>
+              </div>
+              <div className="lg:w-2/4 mx-auto">
+                <AnimeCard
+                  title={apiData.title}
+                  image={apiData.image}
+                  studio={apiData.studio}
+                  url={apiData.url}
+                  score={apiData.score}
+                  genres={apiData.genres}
+                  episodes={apiData.episodes}
+                  synopsis={apiData.synopsis}
+                />
               </div>
             </div>
-          </div>
-        ) : null}
+          )}
+        </div>
       </div>
     </main>
   );
