@@ -11,7 +11,7 @@ const AnimeCard = ({
 }) => {
   return (
     <section className="w-full p-1 mx-auto rounded-xl  my-4 bg-slate-100 border-2 border-slate-200 justify-center shadow-md max-w-3xl">
-      <h1 className="font-bold px-2">{title}</h1>
+      <h1 className="font-bold p-3  text-2xl md:text-3xl">{title}</h1>
       <div className="flex shadow-xl">
         <img className="w-2/4 max-w-[300px]" src={image} alt="" />
         <div className="flex-1 px-1 flex flex-col justify-between sm:justify-center sm:relative">
