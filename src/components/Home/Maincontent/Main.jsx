@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
-import { ImSpinner11 } from "react-icons/im";
+import { CgSpinner } from "react-icons/cg";
 import traceMoe from "../API/Api";
 import AnimeCard from "../AnimeCard/AnimeCard";
 
 function Main() {
   const [apiData, setApiData] = useState(null);
   const [loading, setLoading] = useState(true);
+  let link = "";
 
   useEffect(() => {
     requestApi(
-      "https://api.duniagames.co.id/api/content/upload/file/2675731411632395146.jpeg"
+      "https://www.omegascopio.com.br/wp-content/uploads/2020/03/Zero.jpg"
     );
   }, []);
-
-  let link = "";
-  // "https://api.duniagames.co.id/api/content/upload/file/2675731411632395146.jpeg";
 
   async function requestApi(link) {
     const resultApi = await traceMoe(link);
@@ -46,10 +44,10 @@ function Main() {
         <div className="flex mt-5 p-2 md:h-auto 2xl:p-2 bg-primary-color rounded-2xl flex-wrap md:justify-between md:items-start lg:h-auto">
           {loading ? (
             <h1 className="text-white mx-auto text-8xl animate-spin">
-              <ImSpinner11 />
+              <CgSpinner />
             </h1>
           ) : (
-            <div className="flex-1 flex flex-wrap ">
+            <div className="flex-1 flex flex-wrap">
               <div className="my-5 flex-1 md:mx-5">
                 <video
                   autoPlay
