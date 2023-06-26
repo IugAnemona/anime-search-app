@@ -22,7 +22,7 @@ function Main() {
   }
 
   return (
-    <main className="flex w-full my-10">
+    <main className="flex w-full my-10 container mx-auto">
       <div className="mx-auto h-full w-full my-4 rounded">
         <div className="p-2 bg-primary-color rounded flex justify-between items-center">
           <div className="flex-1">
