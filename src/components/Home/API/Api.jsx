@@ -5,7 +5,7 @@ async function traceMoe(link) {
       link
     )}`
   ).then((e) => e.json());
-
+  console.log(api);
   const jikanData = await fetch(
     `https://api.jikan.moe/v4/anime?q=${api.result[0].anilist.title.romaji}&sfw`
   ).then((e) => e.json());
@@ -19,7 +19,7 @@ async function traceMoe(link) {
     genres: jikanData.data[0].genres.map((x) => x.name),
     episodes: jikanData.data[0].episodes,
     synopsis: jikanData.data[0].synopsis,
-    video: api.result[0].video,
+    video: `${api.result[0].video}&size=l`,
     episode: api.result[0].episode,
   };
 
